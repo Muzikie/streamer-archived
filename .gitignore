@@ -1,0 +1,8 @@
+logs
+.vscode
+.idea
+coverage
+node_modules
+songs
+.DS_Store
+

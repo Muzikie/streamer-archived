@@ -1,12 +1,15 @@
+const path = require('path');
+const fs = require("fs");
+
 module.exports = (req, res) => {
   // Ensure there is a range given for the audio
   const range = req.headers.range;
-  
+
   if (!range) {
     res.status(400).send("Requires Range header");
   }
+
   // get audio stats (about 3MB)
-  
   const fileName = req.params.name;
   const filePath = path.join(__dirname, '/songs/') + fileName + '.mp3';
   let audioSize = 0;

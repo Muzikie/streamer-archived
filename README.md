@@ -1,6 +1,7 @@
 # Muzikie Streamer
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+[![License: Apache 2.0](https://img.shields.io/github/workflow/status/muzikie/streamer/Node.js%20CI/development)](https://img.shields.io/github/workflow/status/muzikie/streamer/Node.js%20CI/development)
 
 Muzikie Streamer is a web application that allows streaming audio tracks to the client applications.
 

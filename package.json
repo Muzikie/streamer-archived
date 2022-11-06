@@ -1,0 +1,23 @@
+{
+  "name": "streamer",
+  "version": "0.1.0",
+  "description": "Muzikie streamer service",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "pm2 start ecosystem.core3.config.js",
+    "stop": "pm2 delete ecosystem.core3.config.js",
+    "test": "jest .",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix"
+  },
+  "author": "Muzikie",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}

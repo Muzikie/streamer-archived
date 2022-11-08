@@ -11,6 +11,7 @@ module.exports = (req, res) => {
 
   // get audio stats (about 3MB)
   const fileName = req.params.name;
+  // @todo Implement audio file path
   const filePath = path.join(__dirname, '/songs/') + fileName + '.mp3';
   let audioSize = 0;
   try {
@@ -22,6 +23,7 @@ module.exports = (req, res) => {
 
   // Parse Range
   // Example: "bytes=32324-"
+  // @todo Handle error if range is not valid, or when headers are not set correctly
   const CHUNK_SIZE = 10 ** 5; // 100KB
   const start = Number(range.replace(/\D/g, ""));
   const end = Math.min(start + CHUNK_SIZE, audioSize - 1);

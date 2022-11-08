@@ -1,1 +1,5 @@
-// @todo Implement audio stream request validation
+
+// @todo Implement stream request validation
+module.exports = (_req, _res, next) => {
+  next();
+};

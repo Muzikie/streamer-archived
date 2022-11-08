@@ -11,12 +11,11 @@ routes.use(bodyParser.urlencoded({ extended: true }));
 routes.use(bodyParser.json());
 
 routes.use((req, _res, next) => {
-  // do logging
   console.log(`Resource requested: ${req.method} ${req.originalUrl}`);
   next(); // make sure we go to the next routes and don't stop here
 });
 
-routes.use('/', status);
+routes.use('/status', status);
 routes.use('/audio', audio);
 
 module.exports = routes;

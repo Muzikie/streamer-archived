@@ -7,7 +7,7 @@ const api = require('./api');
 // const blockchain = require('./blockchain');
 
 // validators
-const Api = require.main.require('./app/validation/status/api');
+const Api = require('../../validation/status/api');
 // const Blockchain = require.main.require('./app/validation/status/blockchain');
 
 /**

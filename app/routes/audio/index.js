@@ -14,6 +14,6 @@ const Stream = require('../../validation/audio/stream');
  *
  * @apiSuccess {String} id Unique ID of the Audio.
  */
-audio.get('/:name', Stream, stream);
+audio.get('/:audioID', Stream, stream);
 
 module.exports = audio;

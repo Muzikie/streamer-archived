@@ -1,0 +1,29 @@
+{
+  "name": "muzikie-streamer-tests",
+  "version": "0.1.0",
+  "description": "Muzikie streamer API test suit",
+  "keywords": [
+    "Muzikie",
+    "streamer",
+    "blockchain"
+  ],
+  "homepage": "https://github.com/Muzikie/streamer",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Muzikie/streamer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Muzikie/streamer/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf ./node_modules",
+    "test": "jest .",
+    "start": "node app.js"
+  },
+  "author": "Block Made GmbH <info@block-made.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "jest": "^29.3.0"
+  }
+}

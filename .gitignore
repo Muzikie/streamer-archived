@@ -3,6 +3,6 @@ logs
 .idea
 coverage
 node_modules
-songs
+/songs
 .DS_Store
 

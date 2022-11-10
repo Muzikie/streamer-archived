@@ -6,6 +6,36 @@
 Muzikie Streamer is a web application that allows streaming audio tracks to the client applications.
 
 
+### Development
+
+#### prerequisite
+- [NVM](https://github.com/nvm-sh/nvm/blob/master/README.md) (Used to set up the required node version)
+- [Node v16.15.0](https://nodejs.org)
+- [Muzikie Blockchain](https://github.com/Muzikie/blockchain)
+
+#### Scripts
+Install dependencies using `npm ci` to be able to use the existing scripts.
+
+You can run 
+
+```
+npm run dev
+```
+to run the project in development mode. Although for running the project in production mode, you should use
+
+```
+npm start
+```
+You may change the configurations under the [config directory](https://github.com/Muzikie/streamer/tree/development/config). There are dedicated files for api, network, and more.
+
+#### Tests
+Tests files are located under the [tests directory](https://github.com/Muzikie/streamer/tree/development/tests). There is a dedicated npm `package.json` file. Once you installed the dependencies, you can run
+
+```
+npm test
+```
+to run tests. You may pass a file directory to run a single file.
+
 
 ## Contributors
 

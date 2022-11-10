@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require("fs");
+const apiConfig = require('../../../config/api');
 
 module.exports = (req, res) => {
   // Ensure there is a range given for the audio
@@ -10,16 +11,19 @@ module.exports = (req, res) => {
   }
 
   // get audio stats (about 3MB)
-  const fileName = req.params.name;
+  const audioID = req.params.audioID;
   // @todo Implement audio file path
-  const filePath = path.join(__dirname, '/songs/') + fileName + '.mp3';
+  const filePath = path.join(__dirname, apiConfig.songs.path) + audioID + `.${apiConfig.songs.extension}`;
   let audioSize = 0;
   try {
     const file = fs.statSync(filePath);
     audioSize = file.size;
   } catch (e) {
-    res.status(400).send("File not found");
+    return res
+      .status(404)
+      .send("Not Found");
   }
+
 
   // Parse Range
   // Example: "bytes=32324-"

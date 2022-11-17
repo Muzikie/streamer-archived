@@ -1,6 +1,6 @@
 const express = require('express');
-const routes = require('./routes');
 const cors = require('cors');
+const routes = require('./routes');
 
 const app = express();
 
@@ -12,7 +12,7 @@ app.use(cors({
 
 app.use('/', routes);
 
-app.use((err, req, res, next) => {
+app.use((err, _req, res) => {
   res.status(err.status || 400).json({
     success: false,
     message: err.message || 'An error occurred.',

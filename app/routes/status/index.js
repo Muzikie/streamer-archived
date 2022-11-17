@@ -1,4 +1,5 @@
 // Route
+// eslint-disable-next-line new-cap
 const status = require('express').Router();
 
 // @todo Implement Blockchain status method

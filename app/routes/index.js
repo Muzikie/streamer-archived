@@ -1,3 +1,4 @@
+// eslint-disable-next-line new-cap
 const routes = require('express').Router();
 const bodyParser = require('body-parser');
 
@@ -11,6 +12,7 @@ routes.use(bodyParser.urlencoded({ extended: true }));
 routes.use(bodyParser.json());
 
 routes.use((req, _res, next) => {
+  // eslint-disable-next-line no-console
   console.log(`Resource requested: ${req.method} ${req.originalUrl}`);
   next(); // make sure we go to the next routes and don't stop here
 });

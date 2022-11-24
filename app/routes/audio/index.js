@@ -1,4 +1,5 @@
 // Route
+// eslint-disable-next-line new-cap
 const audio = require('express').Router();
 
 // methods

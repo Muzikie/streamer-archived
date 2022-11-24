@@ -1,8 +1,9 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["eslint:recommended", "prettier"],
   "plugins": ["import", "babel", "jest", "prettier"],
   "env": {
     "node": true,
+    "es2021": true,
     "jest": true
   },
   "rules": {

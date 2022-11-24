@@ -9,13 +9,9 @@ const schema = yup
 module.exports = (req, _res, next) => {
   schema
     .validate(req.query)
-    .then(() => {
-      return next();
-    })
-    .catch((err) => {
-      return next({
+    .then(() => next())
+    .catch((err) => next({
         status: 400,
         error: err.errors,
-      });
-    });
+      }));
 };

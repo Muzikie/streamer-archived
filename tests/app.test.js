@@ -17,11 +17,9 @@ describe('App', () => {
         .expect(200, done);
     });
 
-    it('should return 400 if any query parameter passed', () => {
-      return supertest(app)
+    it('should return 400 if any query parameter passed', () => supertest(app)
         .get('/status/api?foo=bar')
-        .expect(400);
-    })
+        .expect(400))
   });
 
 

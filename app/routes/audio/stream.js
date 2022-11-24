@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require("fs");
 const apiConfig = require('../../../config/api');
 
+// eslint-disable-next-line max-statements, consistent-return
 module.exports = (req, res) => {
   // Ensure there is a range given for the audio
   const range = req.headers.range;
@@ -13,7 +14,7 @@ module.exports = (req, res) => {
   // get audio stats (about 3MB)
   const audioID = req.params.audioID;
   // @todo Implement audio file path
-  const filePath = path.join(__dirname, apiConfig.songs.path) + audioID + `.${apiConfig.songs.extension}`;
+  const filePath = `${path.join(__dirname, apiConfig.songs.path) + audioID  }.${apiConfig.songs.extension}`;
   let audioSize = 0;
   try {
     const file = fs.statSync(filePath);

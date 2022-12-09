@@ -14,6 +14,7 @@
   "author": "Muzikie",
   "license": "ISC",
   "dependencies": {
+    "@liskhq/lisk-api-client": "^6.0.0-alpha.7",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
     "express": "^4.18.2",

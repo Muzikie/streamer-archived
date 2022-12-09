@@ -3,15 +3,16 @@ const yup = require('yup');
 const schema = yup
   .object()
   .shape({
-    publicKey: yup.string().required().matches(/^[0-9a-f]{64}$/),
+    address: yup.string().required().matches(/^[0-9a-z]{3}[23456789abcdefghjkmnopqrstuvwxyz]{38}$/),
+    range: yup.string().required().matches(/^\d+-\d+$/),
   });
 
 module.exports = (req, _res, next) => {
   schema
-    .validate(req.query)
+    .validate(req.headers)
     .then(() => next())
     .catch((err) => next({
-        status: 400,
-        error: err.errors,
-      }));
+      status: 400,
+      error: err.errors,
+    }));
 };

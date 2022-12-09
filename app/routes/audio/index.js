@@ -6,7 +6,7 @@ const audio = require('express').Router();
 const stream = require('./stream');
 
 // validators
-const Stream = require('../../validation/audio/stream');
+const streamValidator = require('../../validation/audio/stream');
 
 /**
  * @api {get} /audio/stream Stream audio file with a given id
@@ -15,6 +15,6 @@ const Stream = require('../../validation/audio/stream');
  *
  * @apiSuccess {String} id Unique ID of the Audio.
  */
-audio.get('/:audioID', Stream, stream);
+audio.get('/:audioID', streamValidator, stream);
 
 module.exports = audio;

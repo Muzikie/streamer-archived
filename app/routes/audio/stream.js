@@ -1,26 +1,19 @@
 const path = require('path');
 const fs = require("fs");
 const apiConfig = require('../../../config/api');
+const { WS_MESSAGES } = require('../../constants');
+const ERRORS = require('../../errors');
 const ws = require('../../ws');
 
 // eslint-disable-next-line max-statements, consistent-return
 module.exports = (req, res) => {
-  // Ensure there is a range given for the audio
   const { range, address } = req.headers;
 
-  if (!range) {
-    res.status(400).send("The range header is required.");
-  }
-
-  if (!address) {
-    res.status(400).send("The address header is required.");
-  }
-
-  ws('subscription_hasSubscription', { address })
+  ws(WS_MESSAGES.SUBSCRIPTION.HAS, { address })
     // eslint-disable-next-line max-statements
     .then((response) => {
       if (!response.success) {
-        return res.status(401).send("You need a subscription.");
+        return res.status(401).send(ERRORS.NO_SUBSCRIPTION);
       }
       // get audio stats (about 3MB)
       const audioID = req.params.audioID;
@@ -33,7 +26,7 @@ module.exports = (req, res) => {
       } catch (e) {
         return res
           .status(404)
-          .send("The audio file was not found.");
+          .send(ERRORS.FILE_NOT_FOUND);
       }
 
 
@@ -63,7 +56,7 @@ module.exports = (req, res) => {
       return audioStream.pipe(res);
     })
     .catch(() => {
-      return res.status(400).send("An error occurred handling your request.");
+      return res.status(400).send(ERRORS.UNHANDLED_ERROR);
     });
 };
 

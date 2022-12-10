@@ -3,7 +3,7 @@ const fs = require("fs");
 const apiConfig = require('../../../config/api');
 const { WS_MESSAGES } = require('../../constants');
 const ERRORS = require('../../errors');
-const ws = require('../../ws');
+const { ws } = require('../../ws');
 
 // eslint-disable-next-line max-statements, consistent-return
 module.exports = (req, res) => {

@@ -21,11 +21,11 @@ const eventManager = (cb) => {
       const txs = await ws.request(
         ENDPOINTS.CHAIN_GET_TRANSACTIONS_BY_HEIGHT,
         { height: data.blockHeader.height },
-      )
+      );
       const events = await ws.request(
         ENDPOINTS.CHAIN_GET_EVENTS,
         { height: data.blockHeader.height },
-      )
+      );
   
       const succeededTxs = txs.filter((tx) => {
         const executionStatus = getTransactionExecutionStatus(tx, events);

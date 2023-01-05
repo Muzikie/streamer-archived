@@ -3,13 +3,13 @@ const fs = require("fs");
 const apiConfig = require('../../../config/api');
 const { WS_MESSAGES } = require('../../constants');
 const ERRORS = require('../../errors');
-const { ws } = require('../../ws');
+const ws = require('../../ws');
 
 // eslint-disable-next-line max-statements, consistent-return
 module.exports = (req, res) => {
   const { range, address } = req.headers;
 
-  ws(WS_MESSAGES.SUBSCRIPTION.HAS, { address })
+  ws.request(WS_MESSAGES.SUBSCRIPTION.HAS, { address })
     // eslint-disable-next-line max-statements
     .then((response) => {
       if (!response.success) {

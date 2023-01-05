@@ -1,7 +1,21 @@
 const { createWSClient } = require('@liskhq/lisk-api-client');
 const networkConfig = require('../config/network');
 
-const ws = (endpoint, params) =>
-  createWSClient(`ws://${networkConfig.ws.ip}:${networkConfig.ws.port}/rpc-ws`)
-    .then((wsClient) => wsClient.invoke(endpoint, params));
-module.exports = { ws };
+class Socket {
+  constructor () {
+    this.ws = null;
+    this.create();
+  }
+
+  async create() {
+    const url = `ws://${networkConfig.ws.ip}:${networkConfig.ws.port}/rpc-ws`;
+    const ws = await createWSClient(url);
+    this.ws = ws;
+  }
+
+  request (endpoint, params) {
+    return this.ws.invoke(endpoint, params);
+  }
+}
+
+module.exports = new Socket();

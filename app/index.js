@@ -1,18 +1,20 @@
-const express = require('express');
-const cors = require('cors');
-const routes = require('./routes');
-const ERRORS = require('./errors');
-const WHITE_LIST = require('./whiteList');
-
+const express = require("express");
+const cors = require("cors");
+const routes = require("./routes");
+const ERRORS = require("./errors");
+const WHITE_LIST = require("./whiteList");
 const app = express();
+require("../db");
 
 // white listed only our clients
-app.use(cors({
-  origin: WHITE_LIST,
-  optionsSuccessStatus: 200,
-}));
+app.use(
+  cors({
+    origin: WHITE_LIST,
+    optionsSuccessStatus: 200,
+  })
+);
 
-app.use('/', routes);
+app.use("/api/v1", routes);
 
 app.use((err, _req, res) => {
   res.status(err.status || 400).json({

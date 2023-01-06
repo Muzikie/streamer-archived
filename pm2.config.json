@@ -1,0 +1,6 @@
+{
+  "name": "streamer",
+  "cwd": ".",
+  "script": "node ./index.js",
+  "env": {}
+}

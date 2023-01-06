@@ -5,8 +5,9 @@
   "main": "server.js",
   "scripts": {
     "start": "nodemon ./server.js",
-    "start:prod": "NODE_ENV=production pm2 start ./config/ecosystem.js",
-    "stop": "pm2 delete ./config/ecosystem.js",
+    "dev": "nodemon index.js",
+    "start": "pm2 start ./pm2.config.json",
+    "stop": "pm2 stop ./pm2.config.json",
     "test": "jest .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"

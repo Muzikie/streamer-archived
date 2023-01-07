@@ -5,28 +5,34 @@ const Audio = mongoose.model('Audio', {
     type: String,
     required: [true, 'Audio must have a name'],
   },
-  duration: {
-    //seconds
+  releaseYear: {
     type: Number,
-    default: 0,
+    required: [true, 'Audio must have a release year in YYYY format'],
+  },
+  artistName: {
+    type: String,
+    required: [true, 'Audio must have an artist name'],
+  },
+  collectionID: {
+    type: String,
+    required: [true, 'Audio must have a valid collectionID'],
+  },
+  creatorAddress: {
+    type: String,
+    required: [true, 'Audio must have a creator address in Lisk 32 format'],
+  },
+  hash: {
+    type: String,
+    required: [true, 'Audio must have a signed hash of its meta'],
+  },
+  meta: {
+    type: String,
+    required: [true, 'Audio must have an md5 hash of the audio file content'],
   },
   genre: {
-    type: String,
+    type: [Number],
     required: [true, 'Audio must have a genre'],
   },
-  ratingsAverage: {
-    type: Number,
-    default: 0,
-  },
-  ratingsQuantity: {
-    type: Number,
-    default: 0,
-  },
-  artistID: {
-    type: Number,
-    required: [true, 'Audio must have an artistID'],
-  },
-  otherArtists: [String],
   createdAt: {
     type: Date,
     default: Date.now(),

@@ -1,6 +1,6 @@
 {
   "name": "streamer",
   "cwd": ".",
-  "script": "node ./index.js",
+  "script": "node ./server.js",
   "env": {}
 }

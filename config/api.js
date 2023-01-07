@@ -1,7 +1,7 @@
 module.exports = {
-  port: 4000,
+  port: 4002,
   songs: {
-    path: '/songs/',
-    extension: 'mp3'
-  }
+    path: "/songs/",
+    extension: "mp3",
+  },
 };

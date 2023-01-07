@@ -1,23 +1,25 @@
 // eslint-disable-next-line new-cap
-const routes = require('express').Router();
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 
 // Require routes
-const status = require('./status');
-const audio = require('./audio');
+const status = require("./status");
+const audio = require("./audio");
+
+const app = express();
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
-routes.use(bodyParser.urlencoded({ extended: true }));
-routes.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-routes.use((req, _res, next) => {
+app.use((req, _res, next) => {
   // eslint-disable-next-line no-console
   console.log(`Resource requested: ${req.method} ${req.originalUrl}`);
   next(); // make sure we go to the next routes and don't stop here
 });
 
-routes.use('/status', status);
-routes.use('/audio', audio);
+app.use("/status", status);
+app.use("/audios", audio);
 
-module.exports = routes;
+module.exports = app;

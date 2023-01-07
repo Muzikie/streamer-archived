@@ -2,7 +2,7 @@
   "name": "streamer",
   "version": "0.1.0-alpha.0",
   "description": "Muzikie streamer service",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon index.js",
     "start": "pm2 start ./pm2.config.json",
@@ -17,7 +17,9 @@
     "@liskhq/lisk-api-client": "^6.0.0-alpha.7",
     "body-parser": "^1.20.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "mongoose": "^5.13.15",
     "yup": "^0.32.11"
   },
   "devDependencies": {

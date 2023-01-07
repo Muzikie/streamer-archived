@@ -5,6 +5,7 @@ const ERRORS = require('./errors');
 const WHITE_LIST = require('../config/whiteList');
 
 const app = express();
+require('../db');
 
 // white listed only our clients
 app.use(cors({
@@ -12,7 +13,7 @@ app.use(cors({
   optionsSuccessStatus: 200,
 }));
 
-app.use('/', routes);
+app.use('/api/v1', routes);
 
 app.use((_req, res) => {
   res.status(404).json({

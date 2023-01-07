@@ -1,5 +1,5 @@
 const path = require('path');
-const fs = require("fs");
+const fs = require('fs');
 const apiConfig = require('../../../config/api');
 const { WS_MESSAGES } = require('../../constants');
 const ERRORS = require('../../errors');
@@ -34,16 +34,16 @@ module.exports = (req, res) => {
       // Example: "bytes=32324-"
       // @todo Handle error if range is not valid, or when headers are not set correctly
       const CHUNK_SIZE = 10 ** 5; // 100KB
-      const start = Number(range.replace(/\D/g, ""));
+      const start = Number(range.replace(/\D/g, ''));
       const end = Math.min(start + CHUNK_SIZE, audioSize - 1);
 
       // Create headers
       const contentLength = end - start + 1;
       const headers = {
-        "Content-Range": `bytes ${start}-${end}/${audioSize}`,
-        "Accept-Ranges": "bytes",
-        "Content-Length": contentLength,
-        "Content-Type": "audio/mpeg"
+        'Content-Range': `bytes ${start}-${end}/${audioSize}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': contentLength,
+        'Content-Type': 'audio/mpeg'
       }
 
       // HTTP Status 206 for Partial Content

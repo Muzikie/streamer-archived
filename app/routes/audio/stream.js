@@ -6,7 +6,7 @@ const ERRORS = require('../../errors');
 const ws = require('../../ws');
 
 // eslint-disable-next-line max-statements, consistent-return
-module.exports = (req, res) => {
+exports.streamAudio = (req, res) => {
   const { range, address } = req.headers;
 
   ws.request(WS_MESSAGES.SUBSCRIPTION.HAS, { address })

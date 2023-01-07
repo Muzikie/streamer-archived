@@ -1,6 +1,6 @@
-const apiConfig = require("./config/api");
+const apiConfig = require('./config/api');
 
-const app = require("./app");
+const app = require('./app');
 
 // set API port
 const port = apiConfig.port;

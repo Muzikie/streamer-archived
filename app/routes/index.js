@@ -1,10 +1,10 @@
 // eslint-disable-next-line new-cap
-const express = require("express");
-const bodyParser = require("body-parser");
+const express = require('express');
+const bodyParser = require('body-parser');
 
 // Require routes
-const status = require("./status");
-const audio = require("./audio");
+const status = require('./status');
+const audio = require('./audio');
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use((req, _res, next) => {
   next(); // make sure we go to the next routes and don't stop here
 });
 
-app.use("/status", status);
-app.use("/audios", audio);
+app.use('/status', status);
+app.use('/audios', audio);
 
 module.exports = app;

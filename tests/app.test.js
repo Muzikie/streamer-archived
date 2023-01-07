@@ -2,7 +2,7 @@ const supertest = require('supertest');
 const app = require('../app');
 
 jest.mock('../app/ws', () => ({
-  ws: jest.fn(() => Promise.resolve({ success: true }))
+  request: jest.fn(() => Promise.resolve({ success: true }))
 }));
 
 jest.mock('../config/api', () => ({

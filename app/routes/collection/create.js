@@ -1,13 +1,32 @@
-const Audio = require('../../models/collection');
+const md5 = require('md5');
 
-exports.createAudio = async (req, res) => {
+const Collection = require('../../models/collection');
+const { getCoverExtension } = require('../../utils/file');
+const { COVERS } = require('../../../config/api');
+
+// eslint-disable-next-line max-statements
+exports.createCollection = async (req, res) => {
   try {
-    const newAudio = await Audio.create(req.body);
+    const file = req.files.file;
+    const collection = JSON.parse(req.body.data);
+
+    // @todo Check if collectionID is unique
+
+    // Validate signature
+    const md5Hash = md5(file.data);
+
+    if (md5Hash !== collection.meta) {
+      throw new Error('Invalid signature');
+    }
+
+    // Save cover and collection
+    file.mv(`.${COVERS.PATH}` + collection.collectionID + getCoverExtension(file.mimetype));
+    const data = await Collection.create(collection);
+
+    // Respond
     res.status(201).json({
       status: 'success',
-      data: {
-        audios: newAudio,
-      },
+      data,
     });
   } catch (error) {
     res.status(400).json({

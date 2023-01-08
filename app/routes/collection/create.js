@@ -11,7 +11,7 @@ exports.createCollection = async (req, res) => {
     const file = req.files.file;
     const collection = JSON.parse(req.body.data);
 
-    // @todo Check if collectionID is unique
+    // Check if collectionID is unique
     const collectionExists = await Collection.find({ collectionID: collection.collectionID });
     if (collectionExists.length) {
       throw new Error(HTTP_MESSAGES.COLLECTION_EXISTS);
@@ -19,7 +19,6 @@ exports.createCollection = async (req, res) => {
 
     // Validate signature
     const md5Hash = md5(file.data);
-
     if (md5Hash !== collection.meta) {
       throw new Error(HTTP_MESSAGES.INVALID_SIGNATURE);
     }

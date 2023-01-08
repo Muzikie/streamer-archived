@@ -1,4 +1,5 @@
 const Audio = require('../../models/audio');
+const { RESPONSE_STATUSES } = require('../../constants');
 
 exports.updateAudio = async (req, res) => {
   try {
@@ -7,12 +8,12 @@ exports.updateAudio = async (req, res) => {
       runValidators: true,
     });
     res.status(200).json({
-      status: 'success',
+      status: RESPONSE_STATUSES.SUCCESS,
       data,
     });
   } catch (error) {
     res.status(400).json({
-      status: 'fail',
+      status: RESPONSE_STATUSES.ERROR,
       message: error.message,
     });
   }

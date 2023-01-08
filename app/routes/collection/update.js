@@ -1,4 +1,5 @@
 const Collection = require('../../models/collection');
+const { RESPONSE_STATUSES } = require('../../constants');
 
 exports.updateCollection = async (req, res) => {
   try {
@@ -7,12 +8,12 @@ exports.updateCollection = async (req, res) => {
       runValidators: true,
     });
     res.status(200).json({
-      status: 'success',
+      status: RESPONSE_STATUSES.SUCCESS,
       data,
     });
   } catch (error) {
     res.status(400).json({
-      status: 'fail',
+      status: RESPONSE_STATUSES.ERROR,
       message: error.message,
     });
   }

@@ -1,10 +1,11 @@
 const Audio = require('../../models/audio');
+const { RESPONSE_STATUSES } = require('../../constants');
 
 exports.getAllAudios = async (req, res) => {
   try {
     const data = await Audio.find();
     res.status(200).json({
-      status: 'success',
+      status: RESPONSE_STATUSES.SUCCESS,
       data,
       meta: {
         results: data.length,
@@ -13,7 +14,7 @@ exports.getAllAudios = async (req, res) => {
     });
   } catch (error) {
     res.status(404).json({
-      status: 'fail',
+      status: RESPONSE_STATUSES.ERROR,
       message: error.message,
     });
   }

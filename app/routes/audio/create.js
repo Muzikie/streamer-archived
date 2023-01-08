@@ -4,12 +4,17 @@ const Audio = require('../../models/audio');
 const { getAudioExtension } = require('../../utils/file');
 const { AUDIOS } = require('../../../config/api');
 
+// eslint-disable-next-line max-statements
 exports.createAudio = async (req, res) => {
   try {
     const file = req.files.file;
     const audio = JSON.parse(req.body.data);
 
     // @todo Check if audioID is unique
+    const audioExists = await Audio.find({ audioID: audio.audioID });
+    if (audioExists.length) {
+      throw new Error('Audio already exists');
+    }
 
     // Validate signature
     const md5Hash = md5(file.data);

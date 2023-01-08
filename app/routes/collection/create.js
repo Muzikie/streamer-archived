@@ -11,6 +11,10 @@ exports.createCollection = async (req, res) => {
     const collection = JSON.parse(req.body.data);
 
     // @todo Check if collectionID is unique
+    const collectionExists = await Collection.find({ collectionID: collection.collectionID });
+    if (collectionExists.length) {
+      throw new Error('Collection already exists');
+    }
 
     // Validate signature
     const md5Hash = md5(file.data);

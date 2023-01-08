@@ -37,6 +37,10 @@ const Collection = mongoose.model('Collection', {
     type: String,
     required: [true, 'Collection must have a creator address in Lisk 32 format'],
   },
+  collectionID: {
+    type: String,
+    required: [true, 'Collection must have a collection ID'],
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

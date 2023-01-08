@@ -1,19 +1,20 @@
 const Collection = require('../../models/collection');
+const { RESPONSE_STATUSES } = require('../../constants');
 
 exports.getAllCollections = async (req, res) => {
   try {
-    const audios = await Collection.find();
+    const data = await Collection.find();
     res.status(200).json({
-      status: 'success',
-      results: audios.length,
-      requestedAt: req.requestTime,
-      data: {
-        audios: audios,
-      },
+      status: RESPONSE_STATUSES.SUCCESS,
+      data,
+      meta: {
+        results: data.length,
+        requestedAt: req.requestTime,
+      }
     });
   } catch (error) {
     res.status(404).json({
-      status: 'fail',
+      status: RESPONSE_STATUSES.ERROR,
       message: error.message,
     });
   }

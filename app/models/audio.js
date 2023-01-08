@@ -33,6 +33,10 @@ const Audio = mongoose.model('Audio', {
     type: [Number],
     required: [true, 'Audio must have a genre'],
   },
+  audioID: {
+    type: String,
+    required: [true, 'Audio must have a audio ID'],
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

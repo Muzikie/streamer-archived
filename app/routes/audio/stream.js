@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const apiConfig = require('../../../config/api');
+const { AUDIOS } = require('../../../config/api');
 const { WS_MESSAGES } = require('../../constants');
 const ERRORS = require('../../errors');
 const ws = require('../../ws');
@@ -18,7 +18,7 @@ exports.streamAudio = (req, res) => {
       // get audio stats (about 3MB)
       const audioID = req.params.audioID;
       // @todo Implement audio file path
-      const filePath = `${path.join(__dirname, '../../../', apiConfig.songs.path) + audioID  }.${apiConfig.songs.extension}`;
+      const filePath = `${path.join(__dirname, '../../../', AUDIOS.PATH) + audioID  }.${AUDIOS.EXTENSION}`;
       let audioSize = 0;
       try {
         const file = fs.statSync(filePath);

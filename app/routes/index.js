@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 // Require routes
-const statusRouter = require('./status');
+const metaRouter = require('./meta');
 const audioRouter = require('./audio');
 const collectionRouter = require('./collection');
 
@@ -20,7 +20,7 @@ app.use((req, _res, next) => {
   next(); // make sure we go to the next routes and don't stop here
 });
 
-app.use('/status', statusRouter);
+app.use('/meta', metaRouter);
 app.use('/audios', audioRouter);
 app.use('/collections', collectionRouter);
 

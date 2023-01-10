@@ -5,14 +5,20 @@ const collectionRouter = require('express').Router(); //router
 const { getAllCollections } = require('./getAll');
 const { getCollection } = require('./get');
 const { createCollection } = require('./create');
-const { deleteCollection } = require('./delete');
+// const { deleteCollection } = require('./delete');
 const { updateCollection } = require('./update');
 
 // validators
 // @todo add validators
 
 // Routes
-collectionRouter.route('/:id').get(getCollection).patch(updateCollection).delete(deleteCollection);
-collectionRouter.route('/').get(getAllCollections).post(createCollection);
+collectionRouter
+  .route('/:id')
+  .get(getCollection)
+  // .delete(deleteCollection)
+  .patch(updateCollection);
+collectionRouter.route('/')
+  .get(getAllCollections)
+  .post(createCollection);
 
 module.exports = collectionRouter;

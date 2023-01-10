@@ -3,7 +3,7 @@ const { RESPONSE_STATUSES } = require('../../constants');
 
 exports.getAudio = async (req, res) => {
   try {
-    const data = await Audio.findById(req.params.id);
+    const data = await Audio.find({ audioID: req.params.id });
     res.status(200).json({
       status: RESPONSE_STATUSES.SUCCESS,
       data,

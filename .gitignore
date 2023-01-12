@@ -3,7 +3,6 @@ logs
 .idea
 coverage
 node_modules
-/audios
-/covers
+/storage
 .DS_Store
 

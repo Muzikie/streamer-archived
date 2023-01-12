@@ -1,25 +1,28 @@
 class APIFeatures {
-    constructor(
-      query /* passing mongoose query*/,
-      queryString /* query string from express */
-    ) {
+    /**
+     * @param {object} query passing mongoose query
+     * @param {string} queryString query string from express
+     */
+    constructor(query, queryString) {
       this.query = query;
       this.queryString = queryString;
     }
+
     filter() {
-      //1 A) Filtering
+      // Filtering
       const queryObj = { ...this.queryString };
       const excludedFields = ['sort', 'limit', 'page', 'fields'];
       excludedFields.forEach((el) => delete queryObj[el]);
   
-      //2 B) advanced filtering
+      // advanced filtering
       let queryStr = JSON.stringify(queryObj);
-      queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`); // g: all occurances   , \b has space around that
+      queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`); // g: all occurrences, \b has space around that
   
-     //gte, gt, lte, lt
+     // gte, gt, lte, lt
       this.query.find(JSON.parse(queryStr));
       return this;
     }
+
     sort() {
       if (this.queryString.sort) {
         const sortBy = this.queryString.sort.split(',').join(' '); //-price -ratingsAverage
@@ -29,6 +32,7 @@ class APIFeatures {
       }
       return this;
     }
+
     limitFields() {
       if (this.queryString.fields) {
         const fields = this.queryString.fields.split(',').join(' ');
@@ -38,6 +42,7 @@ class APIFeatures {
       }
       return this;
     }
+
     paginate() {
       const page = this.queryString.page * 1 || 1;
       const limit = this.queryString.limit * 1 || 100;
@@ -46,6 +51,5 @@ class APIFeatures {
       return this;
     }
   }
-  
+
   module.exports = APIFeatures;
-  

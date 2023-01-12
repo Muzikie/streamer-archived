@@ -3,7 +3,7 @@ const { RESPONSE_STATUSES } = require('../../constants');
 
 exports.updateUser = async (req, res) => {
   try {
-    const data = await User.updateOne({ address: req.params.address }, req.body, {
+    const data = await User.updateOne({ creatorAddress: req.params.address }, req.body, {
       new: true,
       runValidators: true,
     });

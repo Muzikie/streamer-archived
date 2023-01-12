@@ -24,7 +24,7 @@ exports.createAudio = async (req, res) => {
     }
 
     // Save file and audio
-    audio.mv(`.${AUDIOS.PATH}` + audio.audioID + getAudioExtension(file.mimetype));
+    file.mv(`.${AUDIOS.PATH}` + audio.audioID + getAudioExtension(file.mimetype));
     const data = await Audio.create(audio);
     res.status(201).json({
       status: RESPONSE_STATUSES.SUCCESS,

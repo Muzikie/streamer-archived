@@ -15,6 +15,8 @@ app.use(cors({
   optionsSuccessStatus: 200,
 }));
 
+app.use(express.static('storage'));
+
 // Middleware for parsing uploaded files
 app.use(fileUpload({
   createParentPath: true,

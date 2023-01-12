@@ -3,7 +3,7 @@ const { RESPONSE_STATUSES } = require('../../constants');
 
 exports.getAudios = async (req, res) => {
   try {
-    const data = await Audio.find({ ownerAddress: req.params.address });
+    const data = await Audio.find({ creatorAddress: req.params.address });
     res.status(200).json({
       status: RESPONSE_STATUSES.SUCCESS,
       data,

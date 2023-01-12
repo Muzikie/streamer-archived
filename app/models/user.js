@@ -9,7 +9,7 @@ const User = mongoose.model('User', {
     type: String,
     required: [true, 'User must have a description'],
   },
-  address: {
+  creatorAddress: {
     type: String,
     required: [true, 'User must have a valid Lisk 32 address'],
   },

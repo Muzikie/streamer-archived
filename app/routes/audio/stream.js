@@ -4,12 +4,14 @@ const { AUDIOS } = require('../../../config/api');
 const { WS_MESSAGES } = require('../../constants');
 const ERRORS = require('../../errors');
 const ws = require('../../ws');
+const { getCookies } = require('../../utils/cookie');
 
 // eslint-disable-next-line max-statements, consistent-return
 exports.streamAudio = (req, res) => {
-  const { range, address } = req.headers;
+  const { range } = req.headers;
+  const { address } = getCookies(req.headers.cookie);
 
-  ws.request(WS_MESSAGES.SUBSCRIPTION.HAS, { address })
+  ws.request(WS_MESSAGES.SUBSCRIPTION.HAS, { address: address })
     // eslint-disable-next-line max-statements
     .then((response) => {
       if (!response.success) {
@@ -17,7 +19,6 @@ exports.streamAudio = (req, res) => {
       }
       // get audio stats (about 3MB)
       const audioID = req.params.id;
-      // @todo Implement audio file path
       const filePath = `${path.join(__dirname, '../../../', AUDIOS.PATH) + audioID  }.${AUDIOS.EXTENSION}`;
       let audioSize = 0;
       try {
@@ -32,10 +33,11 @@ exports.streamAudio = (req, res) => {
 
       // Parse Range
       // Example: "bytes=32324-"
-      // @todo Handle error if range is not valid, or when headers are not set correctly
       const CHUNK_SIZE = 10 ** 5; // 100KB
-      const start = Number(range.replace(/\D/g, ''));
-      const end = Math.min(start + CHUNK_SIZE, audioSize - 1);
+      let [start, end] = range.replace('bytes=', '').split('-').map(item => Number(item));
+      if (!end || end < start || end > CHUNK_SIZE) {
+        end = Math.min(audioSize - 1, start + CHUNK_SIZE - 1);
+      }
 
       // Create headers
       const contentLength = end - start + 1;

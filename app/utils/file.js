@@ -1,5 +1,4 @@
 exports.getAudioExtension = (mimetype) => {
-  console.log('mimetype', mimetype);
   switch (mimetype) {
     case 'audio/mpeg':
       return '.mp3';

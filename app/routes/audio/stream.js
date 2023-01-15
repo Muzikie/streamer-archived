@@ -35,7 +35,7 @@ exports.streamAudio = (req, res) => {
       // Example: "bytes=32324-"
       const CHUNK_SIZE = 10 ** 5; // 100KB
       let [start, end] = range.replace('bytes=', '').split('-').map(item => Number(item));
-      if (!end || end === '' || end < start || end > CHUNK_SIZE) {
+      if (!end || end < start || end > CHUNK_SIZE) {
         end = Math.min(audioSize - 1, start + CHUNK_SIZE - 1);
       }
 

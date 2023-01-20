@@ -1,9 +1,9 @@
-const User = require('../../models/user');
+const Profile = require('../../models/profile');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.deleteUser = async (req, res) => {
+exports.deleteProfile = async (req, res) => {
   try {
-    await User.deleteOne({ address: req.params.address });
+    await Profile.findByIdAndDelete(req.params.address);
     res.status(204).json({
       status: RESPONSE_STATUSES.SUCCESS,
       data: null,

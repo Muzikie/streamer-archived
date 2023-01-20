@@ -1,10 +1,10 @@
-const User = require('../../models/user');
+const Profile = require('../../models/profile');
 const APIFeatures = require('../../utils/apiFeatures');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.getAllUsers = async (req, res) => {
+exports.getAllProfiles = async (req, res) => {
   try {
-    const features = new APIFeatures(User.find(), req.query)
+    const features = new APIFeatures(Profile.find(), req.query)
       .filter()
       .sort()
       .limitFields()

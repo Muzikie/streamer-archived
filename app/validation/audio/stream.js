@@ -5,7 +5,7 @@ const schema = yup
   .object()
   .shape({
     address: yup.string().required().matches(/^[0-9a-z]{3}[23456789abcdefghjkmnopqrstuvwxyz]{38}$/),
-    range: yup.string().required().matches(/^bytes=\d+-\d+$/),
+    range: yup.string().required().matches(/^bytes=\d+-(\d+)?$/),
   });
 
 module.exports = (req, _res, next) => {

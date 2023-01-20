@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const metaRouter = require('./meta');
 const audioRouter = require('./audio');
 const collectionRouter = require('./collection');
-const usersRouter = require('./user');
+const profilesRouter = require('./profile');
 
 const app = express();
 
@@ -24,6 +24,6 @@ app.use((req, _res, next) => {
 app.use('/meta', metaRouter);
 app.use('/audios', audioRouter);
 app.use('/collections', collectionRouter);
-app.use('/users', usersRouter);
+app.use('/profiles', profilesRouter);
 
 module.exports = app;

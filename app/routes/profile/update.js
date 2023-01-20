@@ -1,9 +1,9 @@
-const User = require('../../models/user');
+const Profile = require('../../models/profile');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.updateUser = async (req, res) => {
+exports.updateProfile = async (req, res) => {
   try {
-    const data = await User.updateOne({ creatorAddress: req.params.address }, req.body, {
+    const data = await Profile.updateOne({ creatorAddress: req.params.address }, req.body, {
       new: true,
       runValidators: true,
     });

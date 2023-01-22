@@ -4,9 +4,6 @@ const collectionRouter = require('express').Router(); //router
 // Controllers
 const { getAll } = require('./getAll');
 const { get } = require('./get');
-const { create } = require('./create');
-const { destroy } = require('./destroy');
-const { update } = require('./update');
 const { getAudios } = require('./getAudios');
 
 // validators
@@ -15,14 +12,11 @@ const { getAudios } = require('./getAudios');
 // Routes
 collectionRouter
   .route('/:id/audios')
-  .get(getAudios)
+  .get(getAudios);
 collectionRouter
   .route('/:id')
-  .get(get)
-  .delete(destroy)
-  .patch(update);
+  .get(get);
 collectionRouter.route('/')
-  .get(getAll)
-  .post(create);
+  .get(getAll);
 
 module.exports = collectionRouter;

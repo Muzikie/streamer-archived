@@ -1,7 +1,7 @@
 const Profile = require('../../models/profile');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.updateProfile = async (req, res) => {
+exports.update = async (req, res) => {
   try {
     const data = await Profile.updateOne({ creatorAddress: req.params.address }, req.body, {
       new: true,

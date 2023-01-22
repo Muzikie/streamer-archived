@@ -6,7 +6,7 @@ const { getCoverExtension } = require('../../utils/file');
 const { COVERS } = require('../../../config/api');
 
 // eslint-disable-next-line max-statements
-exports.createCollection = async (req, res) => {
+exports.create = async (req, res) => {
   try {
     const file = req.files.file;
     const collection = JSON.parse(req.body.data);
@@ -19,7 +19,7 @@ exports.createCollection = async (req, res) => {
 
     // Validate signature
     const md5Hash = md5(file.data);
-    if (md5Hash !== collection.meta) {
+    if (md5Hash !== collection.coverHash) {
       throw new Error(HTTP_MESSAGES.INVALID_SIGNATURE);
     }
 

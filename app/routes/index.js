@@ -7,6 +7,7 @@ const metaRouter = require('./meta');
 const audioRouter = require('./audio');
 const collectionRouter = require('./collection');
 const profilesRouter = require('./profile');
+const transactionsRouter = require('./transaction');
 
 const app = express();
 
@@ -25,5 +26,6 @@ app.use('/meta', metaRouter);
 app.use('/audios', audioRouter);
 app.use('/collections', collectionRouter);
 app.use('/profiles', profilesRouter);
+app.use('/transactions', transactionsRouter);
 
 module.exports = app;

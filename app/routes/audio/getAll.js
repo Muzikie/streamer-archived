@@ -2,7 +2,7 @@ const Audio = require('../../models/audio');
 const APIFeatures = require('../../utils/apiFeatures');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.getAllAudios = async (req, res) => {
+exports.getAll = async (req, res) => {
   try {
     const features = new APIFeatures(Audio.find(), req.query)
       .filter()

@@ -1,7 +1,7 @@
 const Audio = require('../../models/audio');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.getAudio = async (req, res) => {
+exports.get = async (req, res) => {
   try {
     const data = await Audio.find({ audioID: req.params.id });
     res.status(200).json({

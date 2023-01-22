@@ -1,7 +1,7 @@
 const Collection = require('../../models/collection');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.updateCollection = async (req, res) => {
+exports.update = async (req, res) => {
   try {
     const data = await Collection.findByIdAndUpdate(req.params.id, req.body, {
       new: true,

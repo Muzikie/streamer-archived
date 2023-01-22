@@ -2,11 +2,11 @@
 const profileRouter = require('express').Router(); //router
 
 // Controllers
-const { getAllProfiles } = require('./getAll');
-const { getProfile } = require('./get');
-const { createProfile } = require('./create');
-// const { deleteProfile } = require('./delete');
-const { updateProfile } = require('./update');
+const { getAll } = require('./getAll');
+const { get } = require('./get');
+const { create } = require('./create');
+// const { destroy } = require('./destroy');
+const { update } = require('./update');
 const { getAudios } = require('./getAudios');
 const { getCollections } = require('./getCollections');
 
@@ -22,11 +22,11 @@ profileRouter
   .get(getCollections)
 profileRouter
   .route('/:address')
-  .get(getProfile)
-  // .delete(deleteProfile)
-  .patch(updateProfile);
+  .get(get)
+  // .delete(destroy)
+  .patch(update);
 profileRouter.route('/')
-  .get(getAllProfiles)
-  .post(createProfile);
+  .get(getAll)
+  .post(create);
 
 module.exports = profileRouter;

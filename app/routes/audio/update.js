@@ -1,7 +1,7 @@
 const Audio = require('../../models/audio');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.updateAudio = async (req, res) => {
+exports.update = async (req, res) => {
   try {
     const data = await Audio.findByIdAndUpdate(req.params.id, req.body, {
       new: true,

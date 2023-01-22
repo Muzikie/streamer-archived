@@ -6,7 +6,7 @@ const { getAudioExtension } = require('../../utils/file');
 const { AUDIOS } = require('../../../config/api');
 
 // eslint-disable-next-line max-statements
-exports.createAudio = async (req, res) => {
+exports.create = async (req, res) => {
   try {
     const file = req.files.file;
     const audio = JSON.parse(req.body.data);
@@ -19,13 +19,25 @@ exports.createAudio = async (req, res) => {
 
     // Validate signature
     const md5Hash = md5(file.data);
-    if (md5Hash !== audio.meta) {
+    if (md5Hash !== audio.audioHash) {
       throw new Error(HTTP_MESSAGES.INVALID_SIGNATURE);
     }
 
     // Save file and audio
     file.mv(`.${AUDIOS.PATH}` + audio.audioID + getAudioExtension(file.mimetype));
     const data = await Audio.create(audio);
+    const collection = await Audio.find({ collectionID: audio.collectionID });
+    await Audio.findByIdAndUpdate(
+      audio.collectionID,
+      {
+        ...collection,
+        audios: [
+          ...collection.audios,
+          data._id,
+        ]
+      },
+      { new: true, runValidators: true },
+    );
     res.status(201).json({
       status: RESPONSE_STATUSES.SUCCESS,
       data,

@@ -6,7 +6,7 @@ const { getCoverExtension } = require('../../utils/file');
 const { PHOTOS } = require('../../../config/api');
 
 // eslint-disable-next-line max-statements
-exports.createProfile = async (req, res) => {
+exports.create = async (req, res) => {
   try {
     const avatar = req.files.avatar;
     const banner = req.files.banner;

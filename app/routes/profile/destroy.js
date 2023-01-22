@@ -1,9 +1,9 @@
-const Collection = require('../../models/collection');
+const Profile = require('../../models/profile');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.deleteCollection = async (req, res) => {
+exports.destroy = async (req, res) => {
   try {
-    await Collection.findByIdAndDelete(req.params.id);
+    await Profile.findByIdAndDelete(req.params.address);
     res.status(204).json({
       status: RESPONSE_STATUSES.SUCCESS,
       data: null,

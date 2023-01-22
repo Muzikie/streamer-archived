@@ -1,7 +1,7 @@
 const Profile = require('../../models/profile');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.getProfile = async (req, res) => {
+exports.get = async (req, res) => {
   try {
     const data = await Profile.find({ creatorAddress: req.params.address });
     res.status(200).json({

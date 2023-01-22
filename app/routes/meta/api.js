@@ -1,9 +1,7 @@
 const { RESPONSE_STATUSES } = require('../../constants');
-const { AUDIOS, COVERS } = require('../../../config/api');
 
 const data = {
-  audios: AUDIOS,
-  covers: COVERS,
+  chainID: '00100000',
 };
 
 module.exports = (_req, res) => {

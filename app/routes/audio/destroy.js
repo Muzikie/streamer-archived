@@ -1,9 +1,9 @@
-const Collection = require('../../models/collection');
+const Audio = require('../../models/audio');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.deleteCollection = async (req, res) => {
+exports.destroy = async (req, res) => {
   try {
-    await Collection.findByIdAndDelete(req.params.id);
+    await Audio.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: RESPONSE_STATUSES.SUCCESS,
       data: null,

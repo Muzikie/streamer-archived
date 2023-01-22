@@ -1,10 +1,10 @@
-const Collection = require('../../models/collection');
+const Transaction = require('../../models/transaction');
 const APIFeatures = require('../../utils/apiFeatures');
 const { RESPONSE_STATUSES } = require('../../constants');
 
 exports.getAll = async (req, res) => {
   try {
-    const features = new APIFeatures(Collection.find(), req.query)
+    const features = new APIFeatures(Transaction.find(), req.query)
       .filter()
       .sort()
       .limitFields()
@@ -18,7 +18,7 @@ exports.getAll = async (req, res) => {
       meta: {
         results: data.length,
         requestedAt: req.requestTime,
-      }
+      },
     });
   } catch (error) {
     res.status(404).json({

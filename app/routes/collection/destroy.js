@@ -1,15 +1,15 @@
 const Collection = require('../../models/collection');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.get = async (req, res) => {
+exports.destroy = async (req, res) => {
   try {
-    const data = await Collection.find({ collectionID: req.params.id });
-    res.status(200).json({
+    await Collection.findByIdAndDelete(req.params.id);
+    res.status(204).json({
       status: RESPONSE_STATUSES.SUCCESS,
-      data,
+      data: null,
     });
   } catch (error) {
-    res.status(404).json({
+    res.status(400).json({
       status: RESPONSE_STATUSES.ERROR,
       message: error.message,
     });

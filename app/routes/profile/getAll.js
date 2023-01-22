@@ -2,7 +2,7 @@ const Profile = require('../../models/profile');
 const APIFeatures = require('../../utils/apiFeatures');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.getAllProfiles = async (req, res) => {
+exports.getAll = async (req, res) => {
   try {
     const features = new APIFeatures(Profile.find(), req.query)
       .filter()

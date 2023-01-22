@@ -1,15 +1,18 @@
-const Collection = require('../../models/collection');
+const Transaction = require('../../models/transaction');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.get = async (req, res) => {
+exports.update = async (req, res) => {
   try {
-    const data = await Collection.find({ collectionID: req.params.id });
+    const data = await Transaction.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
     res.status(200).json({
       status: RESPONSE_STATUSES.SUCCESS,
       data,
     });
   } catch (error) {
-    res.status(404).json({
+    res.status(400).json({
       status: RESPONSE_STATUSES.ERROR,
       message: error.message,
     });

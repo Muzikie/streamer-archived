@@ -7,11 +7,11 @@ const ws = require('../../ws');
 const { getCookies } = require('../../utils/cookie');
 
 // eslint-disable-next-line max-statements, consistent-return
-exports.streamAudio = (req, res) => {
+exports.stream = (req, res) => {
   const { range } = req.headers;
   const { address } = getCookies(req.headers.cookie);
 
-  ws.request(WS_MESSAGES.SUBSCRIPTION.HAS, { address: address })
+  ws.request(WS_MESSAGES.subscription_hasSubscription, { address: address })
     // eslint-disable-next-line max-statements
     .then((response) => {
       if (!response.success) {

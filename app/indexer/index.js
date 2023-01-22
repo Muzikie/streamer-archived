@@ -1,5 +1,5 @@
-const eventManager = require('./eventManager');
+const indexer = require('./indexer');
 
 module.exports = {
-  eventManager,
+  indexer,
 };

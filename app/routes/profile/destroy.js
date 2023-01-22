@@ -1,9 +1,9 @@
-const Audio = require('../../models/audio');
+const Profile = require('../../models/profile');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.deleteAudio = async (req, res) => {
+exports.destroy = async (req, res) => {
   try {
-    await Audio.findByIdAndDelete(req.params.id);
+    await Profile.findByIdAndDelete(req.params.address);
     res.status(204).json({
       status: RESPONSE_STATUSES.SUCCESS,
       data: null,

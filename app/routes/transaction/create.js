@@ -2,7 +2,7 @@ const md5 = require('md5');
 
 const Transaction = require('../../models/transaction');
 const { RESPONSE_STATUSES, HTTP_MESSAGES } = require('../../constants');
-const { getExtension } = require('../../utils/file');
+const { getTypeByName } = require('../../utils/file');
 const { AUDIOS } = require('../../../config/api');
 
 const modulesFiles = {
@@ -38,7 +38,7 @@ exports.create = async (req, res) => {
       }
 
       // Save file
-      file.mv(`.${AUDIOS.PATH}${transaction.transactionID}-${fileName}${getExtension(file.mimetype)}`);
+      file.mv(`.${AUDIOS.PATH}${transaction.transactionID}-${fileName}${getTypeByName(fileName)}`);
     }
 
     const data = await Transaction.create(transaction);

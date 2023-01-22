@@ -21,11 +21,11 @@ const Audio = mongoose.model('Audio', {
     type: String,
     required: [true, 'Audio must have a creator address in Lisk 32 format'],
   },
-  hash: {
+  audioSignature: {
     type: String,
-    required: [true, 'Audio must have a signed hash of its meta'],
+    required: [true, 'Audio must have a signed hash of its audioHash'],
   },
-  meta: {
+  audioHash: {
     type: String,
     required: [true, 'Audio must have an md5 hash of the audio file content'],
   },

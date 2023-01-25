@@ -19,7 +19,7 @@ exports.stream = (req, res) => {
       }
       // get audio stats (about 3MB)
       const audioID = req.params.id;
-      const filePath = `${path.join(__dirname, '../../../', AUDIOS.PATH) + audioID  }.${AUDIOS.EXTENSION}`;
+      const filePath = `${path.join(__dirname, '../../../', AUDIOS.PATH) + audioID  }-audio.${AUDIOS.EXTENSION}`;
       let audioSize = 0;
       try {
         const file = fs.statSync(filePath);

@@ -9,14 +9,6 @@ const Collection = mongoose.model('Collection', {
     type: Number,
     required: [true, 'Collection must have a release year in YYYY format'],
   },
-  artistName: {
-    type: String,
-    required: [true, 'Collection must have an artist name'],
-  },
-  coArtists: {
-    type: [String],
-    default: [],
-  },
   collectionType: {
     type: Number,
     required: [true, 'Collection must have a collection type 1 or 2'],

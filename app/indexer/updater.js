@@ -55,7 +55,7 @@ const updater = async (transactions) => {
         await Profile.create(toBeSaved);
       }
 
-      await Audio.findOneAndDelete({ transactionID: transaction.transactionID }, (err) => {
+      await Transaction.findOneAndDelete({ transactionID: transaction.transactionID }, (err) => {
         if (err) {
           console.log('Error deleting transaction', err);
         } else {

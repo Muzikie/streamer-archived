@@ -12,12 +12,12 @@ schemas.audio.create = {
   required: [
     'name',
     'releaseYear',
-    'artistName',
     'genre',
     'collectionID',
     'owners',
     'audioSignature',
     'audioHash',
+    'fit',
   ],
   properties: {
     name: {
@@ -30,26 +30,20 @@ schemas.audio.create = {
       dataType: 'string',
       fieldNumber: 2,
     },
-    artistName: {
-      dataType: 'string',
-      fieldNumber: 3,
-      minLength: 3,
-      maxLength: 40,
-    },
     genre: {
       type: 'array',
-      fieldNumber: 4,
+      fieldNumber: 3,
       items: {
         dataType: 'uint32',
       },
     },
     collectionID: {
       dataType: 'bytes',
-      fieldNumber: 5,
+      fieldNumber: 4,
     },
     owners: {
       type: 'array',
-      fieldNumber: 6,
+      fieldNumber: 5,
       items: {
         $id: 'audio/create/owners',
         type: 'object',
@@ -68,11 +62,19 @@ schemas.audio.create = {
     },
     audioSignature: {
       dataType: 'bytes',
-      fieldNumber: 7,
+      fieldNumber: 6,
     },
     audioHash: {
       dataType: 'bytes',
+      fieldNumber: 7,
+    },
+    fit: {
+      type: 'array',
       fieldNumber: 8,
+      items: {
+        dataType: 'bytes',
+        format: 'lisk32',
+      },
     },
   },
 };
@@ -116,7 +118,7 @@ schemas.audio.setAttributes = {
   $id: 'audio/setAttributes',
   title: 'SetAttributesAsset transaction asset for audio module',
   type: 'object',
-  required: ['name', 'releaseYear', 'artistName', 'genre', 'collectionID', 'audioID'],
+  required: ['name', 'releaseYear', 'genre', 'fit', 'collectionID', 'audioID'],
   properties: {
     name: {
       dataType: 'string',
@@ -128,17 +130,19 @@ schemas.audio.setAttributes = {
       dataType: 'string',
       fieldNumber: 2,
     },
-    artistName: {
-      dataType: 'string',
-      fieldNumber: 3,
-      minLength: 3,
-      maxLength: 40,
-    },
     genre: {
+      type: 'array',
+      fieldNumber: 3,
+      items: {
+        dataType: 'uint32',
+      },
+    },
+    fit: {
       type: 'array',
       fieldNumber: 4,
       items: {
-        dataType: 'uint32',
+        dataType: 'bytes',
+        format: 'lisk32',
       },
     },
     collectionID: {
@@ -182,7 +186,7 @@ schemas.collection.create = {
   $id: 'collection/create',
   title: 'CreateAsset transaction asset for collection module',
   type: 'object',
-  required: ['name', 'releaseYear', 'artistName', 'coArtists', 'collectionType', 'coverSignature', 'coverHash'],
+  required: ['name', 'releaseYear', 'collectionType', 'coverSignature', 'coverHash'],
   properties: {
     name: {
       dataType: 'string',
@@ -194,30 +198,17 @@ schemas.collection.create = {
       dataType: 'string',
       fieldNumber: 2,
     },
-    artistName: {
-      dataType: 'string',
-      fieldNumber: 3,
-      minLength: 3,
-      maxLength: 40,
-    },
-    coArtists: {
-      type: 'array',
-      fieldNumber: 4,
-      items: {
-        dataType: 'string',
-      },
-    },
     collectionType: {
       dataType: 'uint32',
-      fieldNumber: 5,
+      fieldNumber: 3,
     },
     coverSignature: {
       dataType: 'bytes',
-      fieldNumber: 6,
+      fieldNumber: 4,
     },
     coverHash: {
       dataType: 'bytes',
-      fieldNumber: 7,
+      fieldNumber: 5,
     },
   },
 };
@@ -257,7 +248,7 @@ schemas.collection.setAttributes = {
   $id: 'collection/setAttributes',
   title: 'SetAttributesAsset transaction asset for collection module',
   type: 'object',
-  required: ['name', 'releaseYear', 'artistName', 'coArtists', 'collectionType', 'collectionID'],
+  required: ['name', 'releaseYear', 'collectionType', 'collectionID'],
   properties: {
     name: {
       dataType: 'string',
@@ -269,26 +260,13 @@ schemas.collection.setAttributes = {
       dataType: 'string',
       fieldNumber: 2,
     },
-    artistName: {
-      dataType: 'string',
-      fieldNumber: 3,
-      minLength: 3,
-      maxLength: 40,
-    },
-    coArtists: {
-      type: 'array',
-      fieldNumber: 4,
-      items: {
-        dataType: 'string',
-      },
-    },
     collectionType: {
       dataType: 'uint32',
-      fieldNumber: 5,
+      fieldNumber: 3,
     },
     collectionID: {
       dataType: 'bytes',
-      fieldNumber: 6,
+      fieldNumber: 4,
     },
   },
 };

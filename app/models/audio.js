@@ -9,10 +9,6 @@ const Audio = mongoose.model('Audio', {
     type: Number,
     required: [true, 'Audio must have a release year in YYYY format'],
   },
-  artistName: {
-    type: String,
-    required: [true, 'Audio must have an artist name'],
-  },
   collectionID: {
     type: String,
     required: [true, 'Audio must have a valid collectionID'],
@@ -36,6 +32,10 @@ const Audio = mongoose.model('Audio', {
   audioID: {
     type: String,
     required: [true, 'Audio must have a audio ID'],
+  },
+  fit: {
+    type: [String],
+    required: [false, 'Audio may have a list of featuring artists (fit)'],
   },
   createdAt: {
     type: Date,

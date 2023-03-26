@@ -4,7 +4,7 @@ const { RESPONSE_STATUSES } = require('../../constants');
 
 exports.getAll = async (req, res) => {
   try {
-    const features = new APIFeatures(Collection.find(), req.query)
+    const features = new APIFeatures(Collection.find().populate('Audio'), req.query)
       .filter()
       .sort()
       .limitFields()

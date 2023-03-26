@@ -1,5 +1,5 @@
 const { rename } = require('fs');
-const { WS_MESSAGES, idKeys } = require('../constants');
+const { WS_MESSAGES, idKeys, MODULE_FILES, MODULES } = require('../constants');
 const { capitalize } = require('../utils/helpers');
 const { getTypeByName } = require('../utils/file');
 const Audio = require('../models/audio');
@@ -9,22 +9,24 @@ const Transaction = require('../models/transaction');
 const { AUDIOS } = require('../../config/api');
 const ws = require('../ws');
 
-const modulesFiles = {
-  audio: ['audio'],
-  collection: ['cover'],
-  profile: ['banner', 'avatar'],
-  subscription: [],
-};
+const moduleNames = Object.keys(MODULE_FILES);
 
 // eslint-disable-next-line max-statements
 const updater = async (transactions) => {
   for (const transaction of transactions) {
     const  { address, module } = transaction;
+    if (!moduleNames.includes(module)) return false;
+
     const account = await ws.request(WS_MESSAGES[`${module}_getAccount`], { address });
 
     // get last of its type
-    const items = account[module][`${module}s`];
-    const lastItemID = items[items.length - 1];
+    let lastItemID;
+    if (module === MODULES.PROFILE) {
+      lastItemID = account.profileID
+    } else {
+      const items = account[module][`${module}s`];
+      lastItemID = items[items.length - 1];
+    }
     const content = await ws.request(WS_MESSAGES[`${module}_get${capitalize(module)}`], { [idKeys[module]]: lastItemID });
 
     // Apply changes
@@ -38,7 +40,7 @@ const updater = async (transactions) => {
     const storedTransaction = await Transaction.find({ transactionID: transaction.transactionID });
     if (storedTransaction) {
       // rename files
-      for (const fileName of modulesFiles[transaction.module]) {
+      for (const fileName of MODULE_FILES[transaction.module]) {
         rename(
           `.${AUDIOS.PATH}${transaction.transactionID}-${fileName}${getTypeByName(fileName)}`,
           `.${AUDIOS.PATH}${toBeSaved[idKeys[module]]}-${fileName}${getTypeByName(fileName)}`,

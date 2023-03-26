@@ -1,10 +1,10 @@
-const modules = {
+const MODULES = {
   AUDIO: 'audio',
   COLLECTION: 'collection',
   PROFILE: 'profile',
   SUBSCRIPTION: 'subscription',
 };
-exports.modules = modules;
+exports.MODULES = MODULES;
 
 exports.commands = {
   CREATE: 'create',
@@ -16,10 +16,10 @@ exports.commands = {
 };
 
 exports.idKeys = {
-  [modules.AUDIO]: 'audioID',
-  [modules.COLLECTION]: 'collectionID',
-  [modules.PROFILE]: 'profileID',
-  [modules.SUBSCRIPTION]: 'subscriptionID',
+  [MODULES.AUDIO]: 'audioID',
+  [MODULES.COLLECTION]: 'collectionID',
+  [MODULES.PROFILE]: 'profileID',
+  [MODULES.SUBSCRIPTION]: 'subscriptionID',
 }
 
 exports.WS_MESSAGES = {
@@ -42,4 +42,20 @@ exports.HTTP_MESSAGES = {
 exports.RESPONSE_STATUSES = {
   SUCCESS: 'success',
   ERROR: 'error',
+};
+
+const FILE_NAMES = {
+  AUDIO: 'audio',
+  COVER: 'cover',
+  AVATAR: 'avatar',
+  BANNER: 'banner',
+};
+
+exports.FILE_NAMES = FILE_NAMES;
+
+exports.MODULE_FILES = {
+  audio: [FILE_NAMES.AUDIO],
+  collection: [FILE_NAMES.COVER],
+  profile: [FILE_NAMES.BANNER, FILE_NAMES.AVATAR],
+  subscription: [],
 };

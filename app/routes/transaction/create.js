@@ -1,16 +1,9 @@
 const md5 = require('md5');
 
 const Transaction = require('../../models/transaction');
-const { RESPONSE_STATUSES, HTTP_MESSAGES } = require('../../constants');
+const { RESPONSE_STATUSES, HTTP_MESSAGES, MODULE_FILES } = require('../../constants');
 const { getTypeByName } = require('../../utils/file');
 const { AUDIOS } = require('../../../config/api');
-
-const modulesFiles = {
-  audio: ['audio'],
-  collection: ['cover'],
-  profile: ['banner', 'avatar'],
-  subscription: [],
-};
 
 // eslint-disable-next-line max-statements
 exports.create = async (req, res) => {
@@ -24,7 +17,7 @@ exports.create = async (req, res) => {
       throw new Error(HTTP_MESSAGES.TRANSACTION_EXISTS);
     }
 
-    for (const fileName of modulesFiles[transaction.module]) {
+    for (const fileName of MODULE_FILES[transaction.module]) {
       console.log(fileName);
       const file = req.files[fileName];
       console.log(!!file);
@@ -37,8 +30,12 @@ exports.create = async (req, res) => {
         throw new Error(HTTP_MESSAGES.INVALID_SIGNATURE);
       }
 
-      // Save file
-      file.mv(`.${AUDIOS.PATH}${transaction.transactionID}-${fileName}${getTypeByName(fileName)}`);
+      try {
+        const newPath = `.${AUDIOS.PATH}${transaction.transactionID}-${fileName}${getTypeByName(fileName)}`;
+        file.mv(newPath);
+      } catch (e) {
+        console.log('Failed to move', e);
+      }
     }
 
     const data = await Transaction.create(transaction);

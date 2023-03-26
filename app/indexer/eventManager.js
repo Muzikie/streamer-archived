@@ -17,23 +17,27 @@ const getTransactionExecutionStatus = (tx, events) => {
 
 const eventManager = (cb) => {
   ws.onReady(() => {
-    ws.subscribe(EVENTS.NETWORK_NEW_BLOCK, async (data) => {
-      const txs = await ws.request(
-        ENDPOINTS.CHAIN_GET_TRANSACTIONS_BY_HEIGHT,
-        { height: data.blockHeader.height },
-      );
-      const events = await ws.request(
-        ENDPOINTS.CHAIN_GET_EVENTS,
-        { height: data.blockHeader.height },
-      );
-  
-      const succeededTxs = txs.filter((tx) => {
-        const executionStatus = getTransactionExecutionStatus(tx, events);
-        return executionStatus === TX_STATUS.SUCCESS;
-      });
-  
-      if (typeof cb === 'function') {
-        cb(data.blockHeader.height, succeededTxs);
+    ws.subscribe(EVENTS.NETWORK_NEW_BLOCK, async ({ blockHeader }) => {
+      try {
+        const txs = await ws.request(
+          ENDPOINTS.CHAIN_GET_TRANSACTIONS_BY_HEIGHT,
+          { height: blockHeader.height },
+        );
+        const events = await ws.request(
+          ENDPOINTS.CHAIN_GET_EVENTS,
+          { height: blockHeader.height },
+        );
+    
+        const succeededTxs = txs.filter((tx) => {
+          const executionStatus = getTransactionExecutionStatus(tx, events);
+          return executionStatus === TX_STATUS.SUCCESS;
+        });
+
+        if (typeof cb === 'function' && succeededTxs.length) {
+          cb(blockHeader.height, succeededTxs);
+        }
+      } catch (e) {
+        console.log('Caught', e);
       }
     });
   });

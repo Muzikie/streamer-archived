@@ -15,11 +15,18 @@ const moduleNames = Object.keys(MODULE_FILES);
 const updater = async (transactions) => {
   for (const transaction of transactions) {
     const  { address, module } = transaction;
+    if (!moduleNames.includes(module)) return false;
+
     const account = await ws.request(WS_MESSAGES[`${module}_getAccount`], { address });
 
     // get last of its type
-    const items = account[module][`${module}s`];
-    const lastItemID = items[items.length - 1];
+    let lastItemID;
+    if (module === MODULES.PROFILE) {
+      lastItemID = account.profileID
+    } else {
+      const items = account[module][`${module}s`];
+      lastItemID = items[items.length - 1];
+    }
     const content = await ws.request(WS_MESSAGES[`${module}_get${capitalize(module)}`], { [idKeys[module]]: lastItemID });
 
     // Apply changes

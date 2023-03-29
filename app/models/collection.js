@@ -9,29 +9,21 @@ const Collection = mongoose.model('Collection', {
     type: Number,
     required: [true, 'Collection must have a release year in YYYY format'],
   },
-  artistName: {
-    type: String,
-    required: [true, 'Collection must have an artist name'],
-  },
-  coArtists: {
-    type: [String],
-    default: [],
-  },
   collectionType: {
     type: Number,
     required: [true, 'Collection must have a collection type 1 or 2'],
   },
   audios: {
-    type: [String],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Audio' }],
     default: [],
   },
-  hash: {
+  coverSignature: {
     type: String,
-    required: [true, 'Collection must have a signed hash of its meta'],
+    required: [true, 'Collection must have a signed hash of its coverHash'],
   },
-  meta: {
+  coverHash: {
     type: String,
-    required: [true, 'Collection must have an md5 hash of the audio file content'],
+    required: [true, 'Collection must have an md5 hash of the cover photo'],
   },
   creatorAddress: {
     type: String,

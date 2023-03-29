@@ -2,27 +2,21 @@
 const audioRouter = require('express').Router(); //router
 
 // Controllers
-const { getAllAudios } = require('./getAll');
-const { getAudio } = require('./get');
-const { createAudio } = require('./create');
-// const { deleteAudio } = require('./delete');
-const { updateAudio } = require('./update');
-const { streamAudio } = require('./stream');
+const { getAll } = require('./getAll');
+const { get } = require('./get');
+const { stream } = require('./stream');
 
 // validators
 const streamValidator = require('../../validation/audio/stream');
 
 // Routes
 audioRouter
-  .get('/stream/:id', streamValidator, streamAudio);
+  .get('/stream/:id', streamValidator, stream);
 audioRouter
   .route('/:id')
-  .get(getAudio)
-  // .delete(deleteAudio)
-  .patch(updateAudio);
+  .get(get);
 audioRouter
   .route('/')
-  .get(getAllAudios)
-  .post(createAudio);
+  .get(getAll);
 
 module.exports = audioRouter;

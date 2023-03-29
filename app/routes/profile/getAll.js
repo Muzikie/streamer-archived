@@ -1,24 +1,23 @@
-const Audio = require('../../models/audio');
+const Profile = require('../../models/profile');
 const APIFeatures = require('../../utils/apiFeatures');
 const { RESPONSE_STATUSES } = require('../../constants');
 
 exports.getAll = async (req, res) => {
   try {
-    const features = new APIFeatures(Audio.find(), req.query)
+    const features = new APIFeatures(Profile.find(), req.query)
       .filter()
       .sort()
       .limitFields()
       .paginate();
 
     const data = await features.query;
-    
     res.status(200).json({
       status: RESPONSE_STATUSES.SUCCESS,
       data,
       meta: {
         results: data.length,
         requestedAt: req.requestTime,
-      },
+      }
     });
   } catch (error) {
     res.status(404).json({

@@ -1,15 +1,12 @@
 const Collection = require('../../models/collection');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.update = async (req, res) => {
+exports.destroy = async (req, res) => {
   try {
-    const data = await Collection.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    res.status(200).json({
+    await Collection.findByIdAndDelete(req.params.id);
+    res.status(204).json({
       status: RESPONSE_STATUSES.SUCCESS,
-      data,
+      data: null,
     });
   } catch (error) {
     res.status(400).json({

@@ -2,9 +2,9 @@ const Collection = require('../../models/collection');
 const APIFeatures = require('../../utils/apiFeatures');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.getAllCollections = async (req, res) => {
+exports.getAll = async (req, res) => {
   try {
-    const features = new APIFeatures(Collection.find(), req.query)
+    const features = new APIFeatures(Collection.find().populate('Audio'), req.query)
       .filter()
       .sort()
       .limitFields()

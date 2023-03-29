@@ -1,9 +1,9 @@
-const Collection = require('../../models/collection');
+const Profile = require('../../models/profile');
 const { RESPONSE_STATUSES } = require('../../constants');
 
 exports.update = async (req, res) => {
   try {
-    const data = await Collection.findByIdAndUpdate(req.params.id, req.body, {
+    const data = await Profile.updateOne({ creatorAddress: req.params.address }, req.body, {
       new: true,
       runValidators: true,
     });

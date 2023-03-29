@@ -2,11 +2,8 @@
 const collectionRouter = require('express').Router(); //router
 
 // Controllers
-const { getAllCollections } = require('./getAll');
-const { getCollection } = require('./get');
-const { createCollection } = require('./create');
-// const { deleteCollection } = require('./delete');
-const { updateCollection } = require('./update');
+const { getAll } = require('./getAll');
+const { get } = require('./get');
 const { getAudios } = require('./getAudios');
 
 // validators
@@ -15,14 +12,11 @@ const { getAudios } = require('./getAudios');
 // Routes
 collectionRouter
   .route('/:id/audios')
-  .get(getAudios)
+  .get(getAudios);
 collectionRouter
   .route('/:id')
-  .get(getCollection)
-  // .delete(deleteCollection)
-  .patch(updateCollection);
+  .get(get);
 collectionRouter.route('/')
-  .get(getAllCollections)
-  .post(createCollection);
+  .get(getAll);
 
 module.exports = collectionRouter;

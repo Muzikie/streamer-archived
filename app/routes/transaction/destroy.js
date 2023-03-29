@@ -1,9 +1,9 @@
-const Collection = require('../../models/collection');
+const Transaction = require('../../models/transaction');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.deleteCollection = async (req, res) => {
+exports.destroy = async (req, res) => {
   try {
-    await Collection.findByIdAndDelete(req.params.id);
+    await Transaction.findByIdAndDelete(req.params.id);
     res.status(204).json({
       status: RESPONSE_STATUSES.SUCCESS,
       data: null,

@@ -1,9 +1,9 @@
 const Collection = require('../../models/collection');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.getCollection = async (req, res) => {
+exports.get = async (req, res) => {
   try {
-    const data = await Collection.find({ collectionID: req.params.id });
+    const data = await Collection.find({ collectionID: req.params.id }).populate('Audio');
     res.status(200).json({
       status: RESPONSE_STATUSES.SUCCESS,
       data,

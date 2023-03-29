@@ -1,9 +1,9 @@
-const User = require('../../models/user');
+const Transaction = require('../../models/transaction');
 const { RESPONSE_STATUSES } = require('../../constants');
 
-exports.updateUser = async (req, res) => {
+exports.update = async (req, res) => {
   try {
-    const data = await User.updateOne({ creatorAddress: req.params.address }, req.body, {
+    const data = await Transaction.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });

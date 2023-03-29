@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
+const { indexer } = require('./indexer');
 const routes = require('./routes');
 const ERRORS = require('./errors');
 const WHITE_LIST = require('../config/whiteList');
@@ -35,6 +36,8 @@ app.use((_req, res) => {
     message: ERRORS.NOT_FOUND,
   });
 });
+
+indexer();
 
 module.exports = app;
 
